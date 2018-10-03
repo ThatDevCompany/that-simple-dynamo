@@ -1,0 +1,39 @@
+{
+    "name": "that-simple-dynamo",
+    "description": "A dynamo objectstore for That Simple Model",
+    "version": "0.0.4",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ThatDevCompany/that-simple-dynamo.git"
+    },
+    "contributors": [
+        "Stephen James <steve@thatdevcompany.com> (http://thatdevcompany.com)"
+    ],
+    "scripts": {
+        "lint": "node admin/scripts/lint.js",
+        "build": "node admin/scripts/build.js",
+        "test": "node admin/scripts/test.js",
+        "publish": "node admin/scripts/publish.js"
+    },
+    "dependencies": {
+        "class-transformer": "^0.1.9",
+        "aws-sdk": "^2.321.0",
+        "lodash": "^4.17.11",
+        "that-simple-model": "^0.0.13",
+        "that-simple-objectstore": "^0.0.2"
+    },
+    "devDependencies": {
+        "@types/jasmine": "^2.8.7",
+        "@types/node": "^10.5.8",
+        "jasmine-core": "^3.1.0",
+        "jasmine-spec-reporter": "^4.2.1",
+        "nyc": "^11.7.3",
+        "dotenv": "^6.0.0",
+        "sqlite": "^3.0.0",
+        "that-build-library": "^0.1.31",
+        "ts-node": "^7.0.0",
+        "tsconfig-paths": "^3.4.2",
+        "typescript": "^2.8.3"
+    }
+}
