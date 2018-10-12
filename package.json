@@ -20,8 +20,8 @@
         "class-transformer": "^0.1.9",
         "aws-sdk": "^2.321.0",
         "lodash": "^4.17.11",
-        "that-simple-model": "^0.0.16",
-        "that-simple-objectstore": "^0.0.6"
+        "that-simple-model": "^0.0.17",
+        "that-simple-objectstore": "^0.0.8"
     },
     "devDependencies": {
         "@types/jasmine": "^2.8.7",

@@ -13,51 +13,58 @@ export async function query<T extends M.IModel>(
 	cls: M.IModelClass<T>,
 	query: O.IObjectStoreQueryOptions<T>
 ): Promise<O.IObjectStoreQueryResult<T>> {
+	// NULL safety
 	query = query || {}
 
-	console.log({
+	// Validate the all properties in WHERE clause are Searchable
+	const keys: Array<string> = _.keys(query.where || {})
+	if (keys.some(key =>
+		cls.meta.primaryKey != key &&
+		cls.meta.secondaryKey != key &&
+		cls.meta.searchables.indexOf(key) < 0
+	)) {
+		return Promise.resolve({
+			status: O.ObjectStoreQueryStatus.ERROR,
+			items: []
+		})
+	}
+
+	// Build the Query
+	const dynamoQuery = {
 		TableName: DynamoUtils.getTableName(cls),
 		...(where => {
 			if (!where) {
 				return {}
 			}
-			const keys: Array<string> = _.keys(where),
-				indexName = keys.join('') + 'Index',
-				condition = keys.map(k => k + ' =:' + k).join(' and '),
-				values = {...keys.map(k => ({[':' + k]: where[k]}))}
+			const condition = keys.map(k => '#' + k + ' = :' + k).join(' and '),
+				names = keys.reduce((p, k) => ({ ...p, ['#' + k]: k }), {}),
+				values = keys.reduce((p, k) => ({ ...p, [':' + k]: where[k] }), {})
 			return {
-				KeyConditionExpression: condition,
+				FilterExpression: condition,
+				ExpressionAttributeNames: names,
 				ExpressionAttributeValues: values
 			}
 		})(query.where)
-	})
+	}
 
-	return util
 	// Create and Run DynamoDB Query
-		.promisify(c.scan.bind(c))({
-			TableName: DynamoUtils.getTableName(cls),
-			...(where => {
-				if (!where) {
-					return {}
-				}
-				const keys: Array<string> = _.keys(where),
-					indexName = keys.join('') + 'Index',
-					condition = keys.map(k => k + ' =:' + k).join(' and '),
-					values = {...keys.map(k => ({[':' + k]: where[k]}))}
-				return {
-					KeyConditionExpression: condition,
-					ExpressionAttributeValues: values
-				}
-			})(query.where)
-		})
+	return util.promisify(c.scan.bind(c))(dynamoQuery)
 		// Convert results into their Model classes
-		.then(({Items}) => ({
-			items: (Items || []).map(Item => DynamoUtils.dynamoToClass(cls, Item))
-		}))
+		.then(({Items}) => (Items || []).map(Item => DynamoUtils.dynamoToClass(cls, Item)))
 		// Perform any additionality filtering specified as part of the query
-		.then(({items}) =>
+		.then(items =>
 			(query.filter)
-				? {items: items.map(query.filter)}
-				: {items}
+				? items.map(query.filter)
+				: items
 		)
+		// Convert response into a QueryResult
+		.then(items => ({
+			status: O.ObjectStoreQueryStatus.OK,
+			items
+		}))
+		// Catch and Convert errors into a QueryResult
+		.catch(() => ({
+			status: O.ObjectStoreQueryStatus.ERROR,
+			items: null
+		}))
 }

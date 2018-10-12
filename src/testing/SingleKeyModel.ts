@@ -1,22 +1,26 @@
-import { Model, PrimaryKey, IMetaModel, IModel } from 'that-simple-model'
+import * as M from 'that-simple-model'
 
 /**
  * An example of a SingleKey model
  */
-@Model({
+@M.Model({
 	description: 'Description',
 	kind: 'SingleKey'
 })
-export class SingleKey implements IModel {
-	static meta: IMetaModel
-	meta: IMetaModel
+export class SingleKey implements M.IModel {
+	static meta: M.IMetaModel
+	meta: M.IMetaModel
 
-	@PrimaryKey
+	@M.PrimaryKey
 	hash: string
 
+	@M.Searchable
 	title: string
+
+	description: string
 }
 
 export const singleKey = new SingleKey()
 singleKey.hash = 'ABC'
 singleKey.title = 'Test Item'
+singleKey.description = 'Test Description'

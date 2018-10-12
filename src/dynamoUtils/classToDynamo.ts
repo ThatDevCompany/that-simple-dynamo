@@ -15,12 +15,9 @@ export function classToDynamo<T extends IModel>(item: T): any {
 	if (item.meta.secondaryKey) {
 		retVal[item.meta.secondaryKey] = item[item.meta.secondaryKey]
 	}
-	// Add Index Attributes
-	_.get(item, 'meta.indexes', []).forEach(index => {
-		retVal[index.primaryKey] = item[index.primaryKey]
-		if (index.secondaryKey) {
-			retVal[index.secondaryKey] = item[index.secondaryKey]
-		}
+	// Add additional Searchables
+	_.get(item, 'meta.searchables', []).forEach(searchable => {
+		retVal[searchable] = item[searchable]
 	})
 	return retVal
 }

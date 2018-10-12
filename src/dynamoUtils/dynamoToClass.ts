@@ -17,12 +17,9 @@ export function dynamoToClass<T extends IModel>(cls: IModelClass<T>, dynamoItem:
 		retVal[cls.meta.secondaryKey] = dynamoItem[cls.meta.secondaryKey]
 	}
 
-	// Set Index Attributes
-	_.get(cls, 'meta.indexes', []).forEach(index => {
-		retVal[index.primaryKey] = dynamoItem[index.primaryKey]
-		if (index.secondaryKey) {
-			retVal[index.secondaryKey] = dynamoItem[index.secondaryKey]
-		}
+	// Set Searchable Attributes
+	_.get(cls, 'meta.searchables', []).forEach(searchable => {
+		retVal[searchable] = dynamoItem[searchable]
 	})
 
 	// Set Document
