@@ -5,7 +5,6 @@ import * as T from '../testing/index'
  * REMOVE Tests for Dynamo Objectstore
  */
 export const REMOVETests = (args: { objectStore: IObjectStore }) => {
-
 	/* should allow REMOVEing of an item by its ID */
 	it('should allow REMOVEing of an item by its ID', async () => {
 		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
@@ -19,5 +18,4 @@ export const REMOVETests = (args: { objectStore: IObjectStore }) => {
 		)
 		expect(data).toBeUndefined()
 	})
-
 }

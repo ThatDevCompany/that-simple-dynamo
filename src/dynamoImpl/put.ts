@@ -6,7 +6,10 @@ import * as DynamoUtils from '@/dynamoUtils'
 /**
  * Put an Item into a DynamoDB
  */
-export async function put<T extends M.IModel>(c: AWS.DynamoDB.DocumentClient, item: T): Promise<T> {
+export async function put<T extends M.IModel>(
+	c: AWS.DynamoDB.DocumentClient,
+	item: T
+): Promise<T> {
 	return util
 		.promisify(c.put.bind(c))({
 			TableName: DynamoUtils.getTableName(item),

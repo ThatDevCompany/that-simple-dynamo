@@ -5,7 +5,6 @@ import * as _ from 'lodash'
  */
 export function decodeDynamoInfo(info: any): any {
 	return _.cloneDeepWith(info, value => {
-
 		// Replace EMPTY strings
 		if (value === 'EMPTY') {
 			return ''
@@ -14,6 +13,5 @@ export function decodeDynamoInfo(info: any): any {
 		if (value === 'NULL') {
 			return null
 		}
-
 	})
 }

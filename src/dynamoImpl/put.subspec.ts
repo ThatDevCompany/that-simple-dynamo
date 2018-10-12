@@ -5,7 +5,6 @@ import * as T from '../testing/index'
  * PUT Tests for Dynamo Objectstore
  */
 export const PUTTests = (args: { objectStore: IObjectStore }) => {
-
 	/* should allow PUTting of an item with MULTIple keys */
 	it('should allow PUTting of an item with MULTIple keys', async () => {
 		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
@@ -34,5 +33,4 @@ export const PUTTests = (args: { objectStore: IObjectStore }) => {
 		expect(data).toBeDefined()
 		expect(data.hashKey.toString()).toBe(T.singleKey.hash)
 	})
-
 }

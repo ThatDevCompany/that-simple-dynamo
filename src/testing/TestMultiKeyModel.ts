@@ -1,30 +1,22 @@
-import {
-	Model,
-	PrimaryKey,
-	SecondaryKey,
-	IMetaModel,
-	IModel
-} from 'that-simple-model'
+import * as M from 'that-simple-model'
 
 /**
  * Example of a MultiKey model
  */
-@Model({
+@M.Model({
 	description: 'Description',
-	kind: 'TestMultiKey',
-	indexes: [
-		{ primaryKey: 'hash', secondaryKey: 'title' }
-	]
+	kind: 'TestMultiKey'
 })
-export class TestMultiKey implements IModel {
-	static meta: IMetaModel
-	meta: IMetaModel
+export class TestMultiKey implements M.IModel {
+	static meta: M.IMetaModel
+	meta: M.IMetaModel
 
-	@PrimaryKey
+	@M.PrimaryKey
 	hash: string
 
-	@SecondaryKey
+	@M.SecondaryKey
 	range: string
 
+	@M.Searchable
 	title: string
 }

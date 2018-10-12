@@ -5,12 +5,15 @@ import * as T from '../testing/index'
  * GET Tests for Dynamo Objectstore
  */
 export const GETTests = (args: { objectStore: IObjectStore }) => {
-
 	/* should allow GETting of an item with MULTIple keys by its ID */
 	it('should allow GETting of an item with MULTIple keys by its ID', async () => {
 		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
 		await args.objectStore.put(T.multiKey)
-		const data = await args.objectStore.get(T.MultiKey, T.multiKey.hash, T.multiKey.range)
+		const data = await args.objectStore.get(
+			T.MultiKey,
+			T.multiKey.hash,
+			T.multiKey.range
+		)
 		expect(data instanceof T.MultiKey).toBeTruthy()
 		expect((data as T.MultiKey).hash).toBe(T.multiKey.hash)
 		expect((data as T.MultiKey).range).toBe(T.multiKey.range)
@@ -26,5 +29,4 @@ export const GETTests = (args: { objectStore: IObjectStore }) => {
 		expect((data as T.SingleKey).hash).toBe(T.singleKey.hash)
 		expect((data as T.SingleKey).title).toBe(T.singleKey.title)
 	})
-
 }

@@ -6,7 +6,10 @@ import * as DynamoUtils from '@/dynamoUtils'
 /**
  * Removes an item from the dynamodb datastore
  */
-export async function remove<T extends M.IModel>(c: AWS.DynamoDB.DocumentClient, item: T): Promise<void> {
+export async function remove<T extends M.IModel>(
+	c: AWS.DynamoDB.DocumentClient,
+	item: T
+): Promise<void> {
 	return util.promisify(c.delete.bind(c))({
 		TableName: DynamoUtils.getTableName(item),
 		Key: DynamoUtils.getDynamoKey(item)

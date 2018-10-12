@@ -18,11 +18,14 @@ export async function query<T extends M.IModel>(
 
 	// Validate the all properties in WHERE clause are Searchable
 	const keys: Array<string> = _.keys(query.where || {})
-	if (keys.some(key =>
-		cls.meta.primaryKey != key &&
-		cls.meta.secondaryKey != key &&
-		cls.meta.searchables.indexOf(key) < 0
-	)) {
+	if (
+		keys.some(
+			key =>
+				cls.meta.primaryKey != key &&
+				cls.meta.secondaryKey != key &&
+				cls.meta.searchables.indexOf(key) < 0
+		)
+	) {
 		return Promise.resolve({
 			status: O.ObjectStoreQueryStatus.ERROR,
 			items: []
@@ -48,23 +51,24 @@ export async function query<T extends M.IModel>(
 	}
 
 	// Create and Run DynamoDB Query
-	return util.promisify(c.scan.bind(c))(dynamoQuery)
-		// Convert results into their Model classes
-		.then(({Items}) => (Items || []).map(Item => DynamoUtils.dynamoToClass(cls, Item)))
-		// Perform any additionality filtering specified as part of the query
-		.then(items =>
-			(query.filter)
-				? items.map(query.filter)
-				: items
-		)
-		// Convert response into a QueryResult
-		.then(items => ({
-			status: O.ObjectStoreQueryStatus.OK,
-			items
-		}))
-		// Catch and Convert errors into a QueryResult
-		.catch(() => ({
-			status: O.ObjectStoreQueryStatus.ERROR,
-			items: null
-		}))
+	return (
+		util
+			.promisify(c.scan.bind(c))(dynamoQuery)
+			// Convert results into their Model classes
+			.then(({ Items }) =>
+				(Items || []).map(Item => DynamoUtils.dynamoToClass(cls, Item))
+			)
+			// Perform any additionality filtering specified as part of the query
+			.then(items => (query.filter ? items.map(query.filter) : items))
+			// Convert response into a QueryResult
+			.then(items => ({
+				status: O.ObjectStoreQueryStatus.OK,
+				items
+			}))
+			// Catch and Convert errors into a QueryResult
+			.catch(() => ({
+				status: O.ObjectStoreQueryStatus.ERROR,
+				items: null
+			}))
+	)
 }

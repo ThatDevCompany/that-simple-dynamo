@@ -1,5 +1,5 @@
 import * as M from 'that-simple-model'
-import {singleKey} from "@/testing/SingleKeyModel";
+import { singleKey } from '@/testing/SingleKeyModel'
 
 /**
  * Example of a MultiKey model

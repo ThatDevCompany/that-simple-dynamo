@@ -5,7 +5,6 @@ import * as T from '../testing/index'
  * QUERY Tests for Dynamo Objectstore
  */
 export const QUERYTests = (args: { objectStore: IObjectStore }) => {
-
 	const initDb = async () => {
 		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
 		await args.objectStore.put(T.multiKey)
@@ -68,5 +67,4 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		})
 		expect(data.status).toBe(ObjectStoreQueryStatus.ERROR)
 	})
-
 }

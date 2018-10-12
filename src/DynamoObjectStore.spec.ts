@@ -34,5 +34,4 @@ describe('Dynamo ObjectStore', () => {
 	GETTests(args)
 	PUTTests(args)
 	QUERYTests(args)
-
 })

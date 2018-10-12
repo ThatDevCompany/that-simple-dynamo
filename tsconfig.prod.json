@@ -5,6 +5,8 @@
 		"outDir": "dist",
 		"sourceMap": false,
 		"declaration": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"baseUrl": "./",
 		"paths": {
