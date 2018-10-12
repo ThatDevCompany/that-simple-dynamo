@@ -11,9 +11,12 @@ import {
  */
 @Model({
 	description: 'Description',
-	kind: 'MultiKey'
+	kind: 'TestMultiKey',
+	indexes: [
+		{ primaryKey: 'hash', secondaryKey: 'title' }
+	]
 })
-export class MultiKey implements IModel {
+export class TestMultiKey implements IModel {
 	static meta: IMetaModel
 	meta: IMetaModel
 
@@ -25,8 +28,3 @@ export class MultiKey implements IModel {
 
 	title: string
 }
-
-export const multiKey = new MultiKey()
-multiKey.hash = 'ABC'
-multiKey.range = '123'
-multiKey.title = 'Test Item'

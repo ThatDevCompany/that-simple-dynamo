@@ -5,9 +5,12 @@ import { Model, PrimaryKey, IMetaModel, IModel } from 'that-simple-model'
  */
 @Model({
 	description: 'Description',
-	kind: 'SingleKey'
+	kind: 'TestSingleKey',
+	indexes: [
+		{ primaryKey: 'hash', secondaryKey: 'title' }
+	]
 })
-export class SingleKey implements IModel {
+export class TestSingleKey implements IModel {
 	static meta: IMetaModel
 	meta: IMetaModel
 
@@ -16,7 +19,3 @@ export class SingleKey implements IModel {
 
 	title: string
 }
-
-export const singleKey = new SingleKey()
-singleKey.hash = 'ABC'
-singleKey.title = 'Test Item'
