@@ -17,6 +17,5 @@ export class TestMultiKey implements M.IModel {
 	@M.SecondaryKey
 	range: string
 
-	@M.Searchable
 	title: string
 }

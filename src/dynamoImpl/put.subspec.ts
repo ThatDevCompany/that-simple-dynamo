@@ -1,5 +1,5 @@
 import { IObjectStore } from 'that-simple-objectstore'
-import * as T from '../testing/index'
+import * as T from '../testing'
 
 /**
  * PUT Tests for Dynamo Objectstore
@@ -7,9 +7,9 @@ import * as T from '../testing/index'
 export const PUTTests = (args: { objectStore: IObjectStore }) => {
 	/* should allow PUTting of an item with MULTIple keys */
 	it('should allow PUTting of an item with MULTIple keys', async () => {
-		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
+		await T.emptyTable(T.MultiKey)
 		await args.objectStore.put(T.multiKey)
-		const data = await T.dbGet(
+		const data = await T.getData(
 			`SELECT *
 			FROM ${T.multiKey.meta.kind}
 			WHERE hashKey LIKE "${T.multiKey.hash}"
@@ -21,11 +21,30 @@ export const PUTTests = (args: { objectStore: IObjectStore }) => {
 		expect(true).toBeTruthy()
 	})
 
+	/* should allow REPUTting (updating) of an item with MULTIple keys */
+	it('should allow REPUTting (updating) of an item with MULTIple keys', async () => {
+		await T.emptyTable(T.MultiKey)
+		const multiKey = new T.MultiKey()
+		multiKey.hash = 'EFG'
+		multiKey.range = '321'
+		multiKey.title = 'Test Item'
+		multiKey.description = 'Test Description'
+		await args.objectStore.put(multiKey)
+		multiKey.title = 'UPDATE Test'
+		await args.objectStore.put(multiKey)
+		const result = await args.objectStore.query(T.MultiKey, {
+			where: { title: 'UPDATE Test' }
+		})
+		expect(result.items.length).toBe(1)
+		expect(result.items[0].hash).toBe(multiKey.hash)
+		expect(result.items[0].range).toBe(multiKey.range)
+	})
+
 	/* should allow PUTting of an item with SINGLE keys */
 	it('should allow PUTting of an item with SINGLE keys', async () => {
-		await T.dbGet(`DELETE FROM ${T.SingleKey.meta.kind}`)
+		await T.emptyTable(T.SingleKey)
 		await args.objectStore.put(T.singleKey)
-		const data = await T.dbGet(
+		const data = await T.getData(
 			`SELECT *
 			FROM ${T.singleKey.meta.kind}
 			WHERE hashKey LIKE "${T.singleKey.hash}"`

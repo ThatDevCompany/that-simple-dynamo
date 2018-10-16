@@ -1,5 +1,5 @@
 import { IObjectStore } from 'that-simple-objectstore'
-import * as T from '../testing/index'
+import * as T from '../testing'
 
 /**
  * GET Tests for Dynamo Objectstore
@@ -7,7 +7,7 @@ import * as T from '../testing/index'
 export const GETTests = (args: { objectStore: IObjectStore }) => {
 	/* should allow GETting of an item with MULTIple keys by its ID */
 	it('should allow GETting of an item with MULTIple keys by its ID', async () => {
-		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
+		await T.emptyTable(T.MultiKey)
 		await args.objectStore.put(T.multiKey)
 		const data = await args.objectStore.get(
 			T.MultiKey,
@@ -22,7 +22,7 @@ export const GETTests = (args: { objectStore: IObjectStore }) => {
 
 	/* should allow GETting of an item with SINGLE keys by its ID */
 	it('should allow GETting of an item with SINGLE keys by its ID', async () => {
-		await T.dbGet(`DELETE FROM ${T.SingleKey.meta.kind}`)
+		await T.emptyTable(T.SingleKey)
 		await args.objectStore.put(T.singleKey)
 		const data = await args.objectStore.get(T.SingleKey, T.singleKey.hash)
 		expect(data instanceof T.SingleKey).toBeTruthy()

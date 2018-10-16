@@ -16,23 +16,8 @@ export async function query<T extends M.IModel>(
 	// NULL safety
 	query = query || {}
 
-	// Validate the all properties in WHERE clause are Searchable
-	const keys: Array<string> = _.keys(query.where || {})
-	if (
-		keys.some(
-			key =>
-				cls.meta.primaryKey != key &&
-				cls.meta.secondaryKey != key &&
-				cls.meta.searchables.indexOf(key) < 0
-		)
-	) {
-		return Promise.resolve({
-			status: O.ObjectStoreQueryStatus.ERROR,
-			items: []
-		})
-	}
-
 	// Build the Query
+	const keys: Array<string> = _.keys(query.where || {})
 	const dynamoQuery = {
 		TableName: DynamoUtils.getTableName(cls),
 		...(where => {

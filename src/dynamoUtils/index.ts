@@ -1,6 +1,4 @@
 export * from './classToDynamo'
-export * from './decodeDynamoInfo'
 export * from './dynamoToClass'
-export * from './encodeDynamoInfo'
 export * from './getDynamoKey'
 export * from './getTableName'

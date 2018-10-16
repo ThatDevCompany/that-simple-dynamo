@@ -1,12 +1,12 @@
 import { IObjectStore, ObjectStoreQueryStatus } from 'that-simple-objectstore'
-import * as T from '../testing/index'
+import * as T from '../testing'
 
 /**
  * QUERY Tests for Dynamo Objectstore
  */
 export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 	const initDb = async () => {
-		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
+		await T.emptyTable(T.MultiKey)
 		await args.objectStore.put(T.multiKey)
 		await args.objectStore.put(T.multiKey2)
 		await args.objectStore.put(T.multiKey3)
@@ -59,12 +59,12 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		validate(data, 1, T.multiKey3)
 	})
 
-	/* should NOT allow QUERYing against a NON searchable attribute */
-	it('should NOT allow QUERYing against a NON searchable attribute', async () => {
+	/* should allow QUERYing against a NON searchable attribute */
+	it('should allow QUERYing against a NON searchable attribute', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey, {
 			where: { description: T.multiKey4.description }
 		})
-		expect(data.status).toBe(ObjectStoreQueryStatus.ERROR)
+		validate(data, 1, T.multiKey4)
 	})
 }

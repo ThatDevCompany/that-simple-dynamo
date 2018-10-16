@@ -1,7 +1,7 @@
 {
     "name": "that-simple-dynamo",
     "description": "A dynamo objectstore for That Simple Model",
-    "version": "0.0.5",
+    "version": "0.0.9",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -20,8 +20,8 @@
         "class-transformer": "^0.1.9",
         "aws-sdk": "^2.321.0",
         "lodash": "^4.17.11",
-        "that-simple-model": "^0.0.17",
-        "that-simple-objectstore": "^0.0.8"
+        "that-simple-model": "^0.0.18",
+        "that-simple-objectstore": "^0.0.10"
     },
     "devDependencies": {
         "@types/jasmine": "^2.8.7",

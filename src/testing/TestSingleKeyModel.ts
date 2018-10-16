@@ -14,6 +14,5 @@ export class TestSingleKey implements M.IModel {
 	@M.PrimaryKey
 	hash: string
 
-	@M.Searchable
 	title: string
 }

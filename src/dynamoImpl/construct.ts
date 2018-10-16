@@ -16,7 +16,6 @@ export async function construct<T extends IModel>(
 
 	ks.push({ AttributeName: m.primaryKey, KeyType: 'HASH' })
 	ad.push({ AttributeName: m.primaryKey, AttributeType: 'S' })
-	ad.push({ AttributeName: 'title', AttributeType: 'S' })
 
 	if (m.secondaryKey) {
 		ks.push({ AttributeName: m.secondaryKey, KeyType: 'RANGE' })
@@ -34,22 +33,7 @@ export async function construct<T extends IModel>(
 				WriteCapacityUnits: 10
 			}
 		})
-		.catch(() => {})
-
-	// If there are no additional searchables, we're done
-	if (!m.searchables.length) {
-		return
-	}
-
-	// Add any necessary Attributes
-	m.searchables.forEach(searchable => {
-		ad.push({ AttributeName: searchable, AttributeType: 'S' })
-	})
-	// Update the Table with the new attributes
-	await util
-		.promisify(d.updateTable.bind(d))({
-			TableName: m.kind,
-			AttributeDefinitions: ad
+		.catch(e => {
+			console.error(e)
 		})
-		.catch(() => {})
 }

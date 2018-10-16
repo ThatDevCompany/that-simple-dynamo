@@ -12,22 +12,5 @@ export function dynamoToClass<T extends IModel>(
 	if (!dynamoItem) {
 		return null
 	}
-	const retVal: object = {}
-
-	// Set Key Attributes
-	retVal[cls.meta.primaryKey] = dynamoItem[cls.meta.primaryKey]
-	if (cls.meta.secondaryKey) {
-		retVal[cls.meta.secondaryKey] = dynamoItem[cls.meta.secondaryKey]
-	}
-
-	// Set Searchable Attributes
-	_.get(cls, 'meta.searchables', []).forEach(searchable => {
-		retVal[searchable] = dynamoItem[searchable]
-	})
-
-	// Set Document
-	Object.assign(retVal, this.decodeDynamoInfo(dynamoItem.info))
-
-	// Return the Class
-	return plainToClass(cls, retVal)
+	return plainToClass<T, object>(cls, dynamoItem)
 }

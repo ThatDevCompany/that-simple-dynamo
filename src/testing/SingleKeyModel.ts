@@ -14,7 +14,6 @@ export class SingleKey implements M.IModel {
 	@M.PrimaryKey
 	hash: string
 
-	@M.Searchable
 	title: string
 
 	description: string

@@ -2594,17 +2594,17 @@ that-build-library@^0.1.31:
     ts-node "^7.0.0"
     tsconfig-paths "^3.5.0"
 
-that-simple-model@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-0.0.17.tgz#5409f91ca0f98b7fa1785cef0a7f36622146f7d8"
-  integrity sha512-y46uY5vS05q04gOwKXCM57s41Ie4UQ5etaV0x14b7bZI/xDSeKq3T+g7QaYYby2UBUdJ3XReEKJhA410KXW5cg==
+that-simple-model@^0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-0.0.18.tgz#370bcc4632f99583472fe36bd6ef93d1e7a91a4b"
+  integrity sha512-/9cKZyPu95nEMGV00xSnkW7f2Lew+JFYQBISXivnEKammSTqVpRAcxIVhyeJLjguGjSbLAbKh0NadfyJJAWoug==
 
-that-simple-objectstore@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-0.0.8.tgz#3b2d2ccba88a1c1b75335852d16fa03041047958"
-  integrity sha512-tcyQsQOvUbM6eippGK8La09yvWzuauO1rksWoyb1HX75cC0yqBISJXn24IvxJzO/kbcDKPu90fTJSrXITiGtSQ==
+that-simple-objectstore@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-0.0.10.tgz#7b000acd098465cbff14585f4066fd226a47b1cb"
+  integrity sha512-3l3bw9b227YxOMbsaiNEwndhNz2a5OczhCk4DbMEw5pYaodKfdsxQ3yCDWHW+w2cmx1KH2tmWZ3n/ehZ+i77DA==
   dependencies:
-    that-simple-model "^0.0.17"
+    that-simple-model "^0.0.18"
 
 to-fast-properties@^1.0.3:
   version "1.0.3"

@@ -1,5 +1,5 @@
 import { IObjectStore } from 'that-simple-objectstore'
-import * as T from '../testing/index'
+import * as T from '../testing'
 
 /**
  * REMOVE Tests for Dynamo Objectstore
@@ -7,10 +7,10 @@ import * as T from '../testing/index'
 export const REMOVETests = (args: { objectStore: IObjectStore }) => {
 	/* should allow REMOVEing of an item by its ID */
 	it('should allow REMOVEing of an item by its ID', async () => {
-		await T.dbGet(`DELETE FROM ${T.MultiKey.meta.kind}`)
+		await T.emptyTable(T.MultiKey)
 		await args.objectStore.put(T.multiKey)
 		await args.objectStore.remove(T.multiKey)
-		const data = await T.dbGet(
+		const data = await T.getData(
 			`SELECT *
 			FROM ${T.multiKey.meta.kind}
 			WHERE hashKey LIKE "${T.multiKey.hash}"
