@@ -20,6 +20,7 @@
         "class-transformer": "^0.1.9",
         "aws-sdk": "^2.321.0",
         "lodash": "^4.17.11",
+        "that-koa-error": "^0.0.10",
         "that-simple-model": "^0.0.18",
         "that-simple-objectstore": "^0.0.10"
     },

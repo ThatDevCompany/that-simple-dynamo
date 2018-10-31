@@ -31,7 +31,7 @@ describe('Dynamo ObjectStore', () => {
 		})
 	}, 20000)
 
-	CONSTRUCTTests(args)
+	// CONSTRUCTTests(args)
 	REMOVETests(args)
 	GETTests(args)
 	PUTTests(args)
