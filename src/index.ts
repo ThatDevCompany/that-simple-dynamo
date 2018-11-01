@@ -1,2 +1,2 @@
-export * from './DynamoUtils'
+export * from './dynamoUtils'
 export * from './DynamoObjectStore'
