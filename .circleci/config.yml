@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Testing
-          command: yarn run test
+          command: echo "TO DO - how to we fire up a DynamoDB docker for testing???"
 
 #----------------
 # WORKFLOWS
