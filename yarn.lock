@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@types/jasmine@^2.8.7":
+"@types/jasmine@2.8.8":
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.8.tgz#bf53a7d193ea8b03867a38bfdb4fbb0e0bf066c9"
 
@@ -10,7 +10,7 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
 
-"@types/node@^10.5.8":
+"@types/node@10.11.3":
   version "10.11.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.3.tgz#c055536ac8a5e871701aa01914be5731539d01ee"
 
@@ -128,9 +128,9 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
-aws-sdk@^2.321.0:
-  version "2.327.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.327.0.tgz#0192f71f764182bd2f81a65851071ed5265121bd"
+aws-sdk@^2.360.0:
+  version "2.360.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.360.0.tgz#f640acbc7de07aa7a381a31b110fc3502fe90288"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -337,9 +337,9 @@ chownr@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
 
-class-transformer@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.1.9.tgz#29977c528233ca014e6fd9523327ebd31d11ca54"
+class-transformer@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.2.0.tgz#e54b34112e8ef7f913ef938c81fed8ed949fc9c7"
 
 class-utils@^0.3.5:
   version "0.3.6"
@@ -376,6 +376,10 @@ collection-visit@^1.0.0:
 colors@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
+
+colors@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.3.2.tgz#2df8ff573dfbf255af562f8ce7181d6b971a359b"
 
 combined-stream@1.0.6:
   version "1.0.6"
@@ -538,7 +542,7 @@ diff@^3.1.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
 
-dotenv@^6.0.0:
+dotenv@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
 
@@ -1171,11 +1175,11 @@ istanbul-reports@^1.4.0:
   dependencies:
     handlebars "^4.0.3"
 
-jasmine-core@^3.1.0, jasmine-core@~3.2.0:
+jasmine-core@3.2.1, jasmine-core@~3.2.0:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.2.1.tgz#8e4ff5b861603ee83343f2b49eee6a0ffe9650ce"
 
-jasmine-spec-reporter@^4.2.1:
+jasmine-spec-reporter@4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/jasmine-spec-reporter/-/jasmine-spec-reporter-4.2.1.tgz#1d632aec0341670ad324f92ba84b4b32b35e9e22"
   dependencies:
@@ -1544,7 +1548,7 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nyc@^11.7.3:
+nyc@11.9.0, nyc@^11.7.3:
   version "11.9.0"
   resolved "https://registry.yarnpkg.com/nyc/-/nyc-11.9.0.tgz#4106e89e8fbe73623a1fc8b6ecb7abaa271ae1e4"
   dependencies:
@@ -2099,7 +2103,7 @@ sqlite3@^4.0.0:
     node-pre-gyp "^0.10.3"
     request "^2.87.0"
 
-sqlite@^3.0.0:
+sqlite@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/sqlite/-/sqlite-3.0.0.tgz#94b70b6d1e837b1dff6881d393776ff609383c5c"
   dependencies:
@@ -2212,7 +2216,7 @@ test-exclude@^4.2.0:
     read-pkg-up "^1.0.1"
     require-main-filename "^1.0.1"
 
-that-build-library@^0.1.31:
+that-build-library@0.1.31:
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/that-build-library/-/that-build-library-0.1.31.tgz#8d34a794aba2995e96171ba62e9ebbc3e49c0fc5"
   dependencies:
@@ -2224,19 +2228,21 @@ that-build-library@^0.1.31:
     ts-node "^7.0.0"
     tsconfig-paths "^3.5.0"
 
-that-koa-error@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/that-koa-error/-/that-koa-error-0.0.10.tgz#e7f7656c21426e365eaa511a7f48d8c82149f4c1"
-
-that-simple-model@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-0.0.18.tgz#370bcc4632f99583472fe36bd6ef93d1e7a91a4b"
-
-that-simple-objectstore@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-0.0.10.tgz#7b000acd098465cbff14585f4066fd226a47b1cb"
+that-koa-error@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/that-koa-error/-/that-koa-error-1.0.1.tgz#1de8308e53c3aafba0acc078c657715bb06db5cf"
   dependencies:
-    that-simple-model "^0.0.18"
+    colors "^1.3.2"
+
+that-simple-model@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-1.0.1.tgz#fc636227f9edc2ef04bfbb290224b4a8200c5cbb"
+
+that-simple-objectstore@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-1.0.3.tgz#cfdba3018fc25aa748464068a5b4a7cf646ca007"
+  dependencies:
+    that-simple-model "^1.0.1"
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
@@ -2275,7 +2281,7 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-ts-node@^7.0.0:
+ts-node@7.0.1, ts-node@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-7.0.1.tgz#9562dc2d1e6d248d24bc55f773e3f614337d9baf"
   dependencies:
@@ -2288,7 +2294,7 @@ ts-node@^7.0.0:
     source-map-support "^0.5.6"
     yn "^2.0.0"
 
-tsconfig-paths@^3.4.2, tsconfig-paths@^3.5.0:
+tsconfig-paths@3.6.0, tsconfig-paths@^3.5.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.6.0.tgz#f14078630d9d6e8b1dc690c1fc0cfb9cd0663891"
   dependencies:
@@ -2308,7 +2314,7 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
-typescript@^2.8.3:
+typescript@2.9.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
 
