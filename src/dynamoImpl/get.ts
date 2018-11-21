@@ -23,6 +23,7 @@ export async function get<T extends M.IModel>(
 			.then(({ Item }) => DynamoUtils.dynamoToClass(cls, Item))
 	} catch (err) {
 		// Catch Errors
+		// istanbul ignore next
 		throw new DynamoError('Problem getting from Dynamo', err)
 	}
 }

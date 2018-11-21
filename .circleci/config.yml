@@ -1,0 +1,62 @@
+version: 2
+#----------------
+# JOBS
+#----------------
+jobs:
+  #----------------
+  # JOB - CHECKOUT
+  #----------------
+  checkout:
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+
+      - run:
+          name: Installing Packages
+          command: yarn install
+
+      - save_cache:
+          key: cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+          paths: node_modules
+
+  #----------------
+  # JOB - TEST
+  #----------------
+  test:
+    docker:
+      - image: circleci/node:10
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
+
+      - run:
+          name: Testing
+          command: yarn run test
+
+#----------------
+# WORKFLOWS
+#----------------
+workflows:
+  version: 2
+  #----------------
+  # WORKFLOW - CI
+  #----------------
+  ci:
+    jobs:
+      - checkout:
+          filters:
+            branches:
+              only:
+                - master
+      - test:
+          requires:
+            - checkout

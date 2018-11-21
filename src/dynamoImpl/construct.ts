@@ -37,6 +37,7 @@ export async function construct<T extends IModel>(
 		})
 	} catch (err) {
 		// Catch Errors
+		// istanbul ignore next
 		throw new DynamoError('Problem constructing table', err)
 	}
 }

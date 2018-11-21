@@ -19,6 +19,7 @@ export async function remove<T extends M.IModel>(
 		})
 	} catch (err) {
 		// Catch Errors
+		// istanbul ignore next
 		throw new DynamoError('Problem Deleting from Dynamo', err)
 	}
 }

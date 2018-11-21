@@ -25,14 +25,12 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		}
 	}
 
-	/* should allow QUERYing of all items */
 	it('should allow QUERYing of all items', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey)
 		validate(data, 4)
 	})
 
-	/* should allow QUERYing against primary key */
 	it('should allow QUERYing against primary key', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey, {
@@ -41,7 +39,6 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		validate(data, 2)
 	})
 
-	/* should allow QUERYing against secondary key */
 	it('should allow QUERYing against secondary key', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey, {
@@ -50,7 +47,6 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		validate(data, 1, T.multiKey2)
 	})
 
-	/* should allow QUERYing against a searchable attribute */
 	it('should allow QUERYing against a searchable attribute', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey, {
@@ -59,11 +55,19 @@ export const QUERYTests = (args: { objectStore: IObjectStore }) => {
 		validate(data, 1, T.multiKey3)
 	})
 
-	/* should allow QUERYing against a NON searchable attribute */
 	it('should allow QUERYing against a NON searchable attribute', async () => {
 		await initDb()
 		const data = await args.objectStore.query(T.MultiKey, {
 			where: { description: T.multiKey4.description }
+		})
+		validate(data, 1, T.multiKey4)
+	})
+
+	it('should allow QUERYing filters', async () => {
+		await initDb()
+		const data = await args.objectStore.query(T.MultiKey, {
+			where: { description: T.multiKey4.description },
+			filter: item => true
 		})
 		validate(data, 1, T.multiKey4)
 	})

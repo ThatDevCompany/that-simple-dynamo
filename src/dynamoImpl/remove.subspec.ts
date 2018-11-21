@@ -5,7 +5,6 @@ import * as T from '../testing'
  * REMOVE Tests for Dynamo Objectstore
  */
 export const REMOVETests = (args: { objectStore: IObjectStore }) => {
-	/* should allow REMOVEing of an item by its ID */
 	it('should allow REMOVEing of an item by its ID', async () => {
 		await T.emptyTable(T.MultiKey)
 		await args.objectStore.put(T.multiKey)

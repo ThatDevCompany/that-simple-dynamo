@@ -1,10 +1,15 @@
+import { dynamoToClass } from '@/dynamoUtils/dynamoToClass'
+import { MultiKey } from '@/testing'
+
 /**
  * Tests for dynamoToClass
  */
 describe('dynamoToClass', () => {
-	/* should convert classes to Dynamo */
-	it('should convert classes to Dynamo', async () => {
-		// TODO
-		expect(true).toBeTruthy()
+	it('should handle nulls', async () => {
+		expect(dynamoToClass(MultiKey, null)).toBeNull()
+	})
+
+	it('should convert dynamo objects to classes', async () => {
+		expect(dynamoToClass(MultiKey, {}) instanceof MultiKey).toBeTruthy()
 	})
 })

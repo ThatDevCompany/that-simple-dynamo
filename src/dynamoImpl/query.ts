@@ -42,10 +42,13 @@ export async function query<T extends M.IModel>(
 			.promisify(c.scan.bind(c))(dynamoQuery)
 			// Convert results into their Model classes
 			.then(({ Items }) =>
-				(Items || []).map(Item => DynamoUtils.dynamoToClass(cls, Item))
+				(Items || /* istanbul ignore next */ []).map(Item =>
+					DynamoUtils.dynamoToClass(cls, Item)
+				)
 			)
 			// Perform any additionality filtering specified as part of the query
-			.then(items => (query.filter ? items.map(query.filter) : items))
+			.then(items => (query.filter ? items.filter(query.filter) : items))
+
 			// Convert response into a QueryResult
 			.then(items => ({
 				status: O.ObjectStoreQueryStatus.OK,
@@ -53,6 +56,7 @@ export async function query<T extends M.IModel>(
 			}))
 	} catch (err) {
 		// Catch Errors
+		// istanbul ignore next
 		throw new DynamoError('Problem Querying from Dynamo', err)
 	}
 }

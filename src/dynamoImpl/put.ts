@@ -21,6 +21,7 @@ export async function put<T extends M.IModel>(
 			.then(() => item)
 	} catch (err) {
 		// Catch Errors
+		// istanbul ignore next
 		throw new DynamoError('Problem Putting to Dynamo', err)
 	}
 }
