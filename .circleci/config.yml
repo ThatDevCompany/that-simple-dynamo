@@ -38,6 +38,8 @@ jobs:
           keys:
             - cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "package.json" }}
 
+      - setup_remote_docker
+
       - run:
           name: Testing
           command: yarn run test
