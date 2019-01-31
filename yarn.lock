@@ -2238,6 +2238,10 @@ that-simple-model@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-1.0.1.tgz#fc636227f9edc2ef04bfbb290224b4a8200c5cbb"
 
+that-simple-model@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-1.0.2.tgz#930ab7cbe238dfdfe47c571d4a66334f14a2c5b4"
+
 that-simple-objectstore@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-1.0.3.tgz#cfdba3018fc25aa748464068a5b4a7cf646ca007"
