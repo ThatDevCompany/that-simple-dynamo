@@ -2235,8 +2235,9 @@ that-simple-model@^1.0.1, that-simple-model@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/that-simple-model/-/that-simple-model-1.0.2.tgz#930ab7cbe238dfdfe47c571d4a66334f14a2c5b4"
 
-"that-simple-objectstore@file:../that-simple-objectstore/dist":
+that-simple-objectstore@^1.0.5:
   version "1.0.5"
+  resolved "https://registry.yarnpkg.com/that-simple-objectstore/-/that-simple-objectstore-1.0.5.tgz#2a95cfda557c5c9d5cabee3a21b83898b2cd2110"
   dependencies:
     that-simple-model "^1.0.1"
 
