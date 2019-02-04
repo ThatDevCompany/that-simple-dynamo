@@ -32,7 +32,8 @@ export async function query<T extends M.IModel>(
 				return {
 					FilterExpression: condition,
 					ExpressionAttributeNames: names,
-					ExpressionAttributeValues: values
+					ExpressionAttributeValues: values,
+					ExclusiveStartKey : query.continuationToken
 				}
 			})(query.where)
 		}
@@ -41,18 +42,24 @@ export async function query<T extends M.IModel>(
 		return await util
 			.promisify(c.scan.bind(c))(dynamoQuery)
 			// Convert results into their Model classes
-			.then(({ Items }) =>
-				(Items || /* istanbul ignore next */ []).map(Item =>
-					DynamoUtils.dynamoToClass(cls, Item)
-				)
+			.then(({ Items, LastEvaluatedKey }) =>
+				{
+					return {
+						items: (Items || /* istanbul ignore next */ []).map(Item =>
+							DynamoUtils.dynamoToClass(cls, Item)
+						),
+						continuationToken: LastEvaluatedKey
+					}
+				}
 			)
 			// Perform any additionality filtering specified as part of the query
-			.then(items => (query.filter ? items.filter(query.filter) : items))
+			.then(data => (query.filter ? {items: data.items.filter(query.filter), continuationToken: data.continuationToken} : data))
 
 			// Convert response into a QueryResult
-			.then(items => ({
+			.then(data => ({
 				status: O.ObjectStoreQueryStatus.OK,
-				items
+				items: data.items,
+				continuationToken: data.continuationToken
 			}))
 	} catch (err) {
 		// Catch Errors
