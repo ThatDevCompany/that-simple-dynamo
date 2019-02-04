@@ -1,7 +1,7 @@
 {
     "name": "that-simple-dynamo",
     "description": "A dynamo objectstore for That Simple Model",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "MIT",
     "repository": {
         "type": "git",
