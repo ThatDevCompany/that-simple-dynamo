@@ -33,7 +33,8 @@ export async function query<T extends M.IModel>(
 					FilterExpression: condition,
 					ExpressionAttributeNames: names,
 					ExpressionAttributeValues: values,
-					ExclusiveStartKey: options.continuationToken
+					ExclusiveStartKey: options.continuationToken,
+					Limit: options.limit
 				}
 			})(options.where)
 		}
@@ -50,8 +51,14 @@ export async function query<T extends M.IModel>(
 
 				// IF there are more results to get
 				if (
-					(!options.continuationCount || options.continuationCount > 0) &&
-					continuationToken
+					(!options.continuationCount 
+					|| options.continuationCount > 0) 
+						&& continuationToken 
+						&& _.isUndefined(options.limit)
+					|| ! _.isUndefined(options.limit) 
+						&& Items.length < options.limit
+						&& (options.continuationCount > 0) 
+						&& continuationToken
 				) {
 					const res = await query<T>(c, cls, {
 						...options,
