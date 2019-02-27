@@ -27,12 +27,18 @@ export async function query<T extends M.IModel>(
 					return {}
 				}
 
-				const keys = DynamoUtils.getDynamoKey(cls);
+				const keys = DynamoUtils.getDynamoKey(cls)
 
-				const condition = fields.filter(f => (keys.hasOwnProperty(f))).map(k => '#' + k + ' = :' + k).join(' and '),
+				const condition = fields
+						.filter(f => keys.hasOwnProperty(f))
+						.map(k => '#' + k + ' = :' + k)
+						.join(' and '),
 					names = fields.reduce((p, k) => ({ ...p, ['#' + k]: k }), {}),
 					values = fields.reduce((p, k) => ({ ...p, [':' + k]: where[k] }), {}),
-					filter = fields.filter(f => (!keys.hasOwnProperty(f))).map(k => '#' + k + ' = :' + k).join(' and ')
+					filter = fields
+						.filter(f => !keys.hasOwnProperty(f))
+						.map(k => '#' + k + ' = :' + k)
+						.join(' and ')
 
 				return {
 					FilterExpression: _.isEmpty(filter) ? null : filter,
