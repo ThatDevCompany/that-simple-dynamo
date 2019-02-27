@@ -19,18 +19,24 @@ export async function query<T extends M.IModel>(
 		options = options || {}
 
 		// Build the Query
-		const keys: Array<string> = _.keys(options.where || {})
+		const fields: Array<string> = _.keys(options.where || {})
 		const dynamoQuery = {
 			TableName: DynamoUtils.getTableName(cls),
 			...(where => {
 				if (!where) {
 					return {}
 				}
-				const condition = keys.map(k => '#' + k + ' = :' + k).join(' and '),
-					names = keys.reduce((p, k) => ({ ...p, ['#' + k]: k }), {}),
-					values = keys.reduce((p, k) => ({ ...p, [':' + k]: where[k] }), {})
+
+				const keys = DynamoUtils.getDynamoKey(cls);
+
+				const condition = fields.filter(f => (keys.hasOwnProperty(f))).map(k => '#' + k + ' = :' + k).join(' and '),
+					names = fields.reduce((p, k) => ({ ...p, ['#' + k]: k }), {}),
+					values = fields.reduce((p, k) => ({ ...p, [':' + k]: where[k] }), {}),
+					filter = fields.filter(f => (!keys.hasOwnProperty(f))).map(k => '#' + k + ' = :' + k).join(' and ')
+
 				return {
-					FilterExpression: condition,
+					FilterExpression: _.isEmpty(filter) ? null : filter,
+					KeyConditionExpression: condition,
 					ExpressionAttributeNames: names,
 					ExpressionAttributeValues: values,
 					ExclusiveStartKey: options.continuationToken,
@@ -41,7 +47,7 @@ export async function query<T extends M.IModel>(
 
 		// Create and Run DynamoDB Query
 		return await util
-			.promisify(c.scan.bind(c))(dynamoQuery)
+			.promisify(c.query.bind(c))(dynamoQuery)
 			// Convert results into their Model classes
 			.then(async ({ Items, LastEvaluatedKey }) => {
 				let items = (Items || []).map(Item =>
